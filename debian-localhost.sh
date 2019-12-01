@@ -20,7 +20,7 @@ apt install -y apache2 libapache2-mpm-itk libapache2-mod-fastcgi
 dpkg --configure -a
 
 #Activate Apache2 mods
-a2enmod rewrite actions fcgid alias proxy_fcgi headers
+a2enmod rewrite actions headers fastcgi fcgid alias proxy_fcgi 
 service apache2 restart
 
 #Add PHP repo
