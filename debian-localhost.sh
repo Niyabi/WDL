@@ -16,7 +16,7 @@ apt install -y wget
 #Install Apache2
 cd /tmp && wget http://mirrors.kernel.org/ubuntu/pool/multiverse/liba/libapache-mod-fastcgi/libapache2-mod-fastcgi_2.4.7~0910052141-1.2_amd64.deb
 dpkg -i libapache2-mod-fastcgi_2.4.7~0910052141-1.2_amd64.deb; apt install -f
-apt install -y apache2 libapache2-mpm-itk libapache2-mod-fastcgi
+apt install -y apache2 libapache2-mpm-itk libapache2-mod-fastcgi libapache2-mod-fcgid
 dpkg --configure -a
 
 #Activate Apache2 mods
@@ -32,7 +32,7 @@ sh -c 'echo "deb https://packages.sury.org/php/ $(lsb_release -sc) main" > /etc/
 apt update
 
 #Install PHP 7.2 and some of its mods required by Magento 2
-apt install -y php7.2 php7.2-fpm php7.2-common php7.2-xml php7.2-bcmath php7.2-bz2 php7.2-curl php7.2-gd php7.2-intl php7.2-json php7.2-mbstring php7.2-opcache php7.2-mysql php7.2-readline php7.2-soap
+apt install -y php7.2 php7.2-fpm php7.2-common php7.2-xml php7.2-bcmath php7.2-bz2 php7.2-curl php7.2-gd php7.2-intl php7.2-json php7.2-mbstring php7.2-opcache php7.2-mysql php7.2-readline php7.2-soap php7.2-zip
 
 #Install Composer
 php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"
@@ -40,3 +40,6 @@ php -r "if (hash_file('sha384', 'composer-setup.php') === 'a5c698ffe4b8e849a443b
 php composer-setup.php
 php -r "unlink('composer-setup.php');"
 mv composer.phar /usr/local/bin/composer 
+
+#Install zip & unzip, required for Magento2 composer installation
+apt install -y zip unzip
