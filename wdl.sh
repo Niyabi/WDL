@@ -31,7 +31,7 @@ wget -O /etc/apt/trusted.gpg.d/php.gpg https://packages.sury.org/php/apt.gpg
 sh -c 'echo "deb https://packages.sury.org/php/ $(lsb_release -sc) main" > /etc/apt/sources.list.d/php.list'
 apt update
 
-#Install PHP 7.2 and some of its mods required by Magento 2
+#Install PHP 7.2 and some of its extensions
 apt install -y php7.2 php7.2-fpm php7.2-common php7.2-xml php7.2-bcmath php7.2-bz2 php7.2-curl php7.2-gd php7.2-intl php7.2-json php7.2-mbstring php7.2-opcache php7.2-mysql php7.2-readline php7.2-soap php7.2-zip
 
 #Change settings in php.ini
@@ -50,8 +50,6 @@ mv composer.phar /usr/local/bin/composer
 apt install -y zip unzip
 
 #Install phpMyAdmin
-service apache2 start
-service mysql start
 apt install php-tcpdf
 apt -t buster-backports install php-twig
 apt install phpmyadmin
