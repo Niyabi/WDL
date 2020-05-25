@@ -20,7 +20,7 @@ apt install -y apache2 libapache2-mpm-itk libapache2-mod-fastcgi libapache2-mod-
 dpkg --configure -a
 
 #Activate Apache2 mods
-a2enmod rewrite actions headers fastcgi fcgid alias proxy_fcgi 
+a2enmod rewrite actions headers deflate expires fastcgi fcgid alias proxy_fcgi 
 service apache2 restart
 
 #Add PHP repo
@@ -34,12 +34,24 @@ apt update
 #Install PHP 7.2 and some of its mods required by Magento 2
 apt install -y php7.2 php7.2-fpm php7.2-common php7.2-xml php7.2-bcmath php7.2-bz2 php7.2-curl php7.2-gd php7.2-intl php7.2-json php7.2-mbstring php7.2-opcache php7.2-mysql php7.2-readline php7.2-soap php7.2-zip
 
+#Change settings in php.ini
+sed -i '/max_input_time/c\max_input_time = 1800' /etc/php/7.2/fpm/php.ini
+sed -i '/max_input_time/c\max_execution_time = 1800' /etc/php/7.2/fpm/php.ini
+sed -i '/max_input_time/c\memory_limit = 4G' /etc/php/7.2/fpm/php.ini
+
 #Install Composer
-php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"
-php -r "if (hash_file('sha384', 'composer-setup.php') === 'a5c698ffe4b8e849a443b120cd5ba38043260d5c4023dbf93e1558871f1f07f58274fc6f4c93bcfd858c6bd0775cd8d1') { echo 'Installer verified'; } else { echo 'Installer corrupt'; unlink('composer-setup.php'); } echo PHP_EOL;"
-php composer-setup.php
-php -r "unlink('composer-setup.php');"
+php7.2 -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"
+php7.2 -r "if (hash_file('sha384', 'composer-setup.php') === 'a5c698ffe4b8e849a443b120cd5ba38043260d5c4023dbf93e1558871f1f07f58274fc6f4c93bcfd858c6bd0775cd8d1') { echo 'Installer verified'; } else { echo 'Installer corrupt'; unlink('composer-setup.php'); } echo PHP_EOL;"
+php7.2 composer-setup.php
+php7.2 -r "unlink('composer-setup.php');"
 mv composer.phar /usr/local/bin/composer 
 
 #Install zip & unzip, required for Magento2 composer installation
 apt install -y zip unzip
+
+#Install phpMyAdmin
+service apache2 start
+service mysql start
+apt install php-tcpdf
+apt -t buster-backports install php-twig
+apt install phpmyadmin
