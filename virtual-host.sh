@@ -8,7 +8,7 @@ read PROJECT_PATH
 
 CONFIG='
 <VirtualHost *:80>
-    ServerName '"$PROJECT_NAME"'.local
+        ServerName '"$PROJECT_NAME"'.local
         ServerAdmin webmaster@localhost
         DocumentRoot  '"$PROJECT_PATH"'
 	AllowEncodedSlashes NoDecode

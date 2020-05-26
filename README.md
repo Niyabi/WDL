@@ -6,16 +6,15 @@ Project purpose is to help with creating local Apache web server with PHP and Ma
 
 ## Getting Started
 
-These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.
+These instructions will get you a copy of the project up and running on your local machine for development purposes. 
 
 ### Prerequisites
 
 What things you need to install the software and how to install them
 
-```
-Windows Subsystem for Linux
-Debian linux from Microsoft Store
-```
+
+* Windows Subsystem for Linux
+* Debian linux from Microsoft Store
 
 ### Installing
 
@@ -44,7 +43,7 @@ exit;
 sudo service mysql restart
 ```
 
-### Using
+### How to use
 
 To start web server run start.sh.
 
@@ -58,7 +57,7 @@ To stop web server run stop.sh.
 sudo sh ~/WDL/stop.sh
 ```
 
-To create virtual host run virtual-host.sh. You will be asked for project name and path to project, eg myproject in /mnt/c/Users/*YourUserName*/Documents/myproject so your URL will be myproject.local.
+To create virtual host run virtual-host.sh. You will be asked for project name and path to project, eg *myproject* in */mnt/c/Users/*YourUserName*/Documents/myproject* so your URL will be myproject.local.
 
 ```shell
 sudo sh ~/WDL/virtual-host.sh
@@ -68,9 +67,47 @@ To connect to virtual host open Notepad as administrator, open hosts file in C:\
 
 To access database use use HeidiSQL or phpMyAdmin (http://localhost/phpmyadmin/). To login to phpMyAdmin (if not asked for username during phpMyAdmin installation) username will be phpmyadmin and password then one you set during installation.
 
+## Notes
+
+This configuration allows use of mutiple version of PHP at the same time. To install different, than 7.2, version of PHP use this command:
+
+```shell
+sudo apt install -y phpX.Y phpX.Y-fpm
+```
+
+For example:
+
+```shell
+sudo apt install -y php7.0 php7.0-fpm
+```
+
+To install PHP extension run:
+
+```shell
+sudo apt install -y phpX.Y-ext
+```
+
+For example:
+
+```shell
+sudo apt install -y php7.0-pdo
+```
+
+In virtual host config file (found here: */etc/apache2/sites-available/*) you have to change php-fpm sock in this line:
+
+```apache
+SetHandler "proxy:unix:/var/run/php/php7.2-fpm.sock|fcgi://localhost/"
+```
+
+For example:
+
+```apache
+SetHandler "proxy:unix:/var/run/php/php7.0-fpm.sock|fcgi://localhost/"
+```
+
 ## Authors
 
-* **Szymon Krawiec** - *Initial work* - [Niyabi](https://github.com/Niyabi)
+* **Szymon Krawiec** - [Niyabi](https://github.com/Niyabi)
 
 ## License
 
