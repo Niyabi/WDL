@@ -42,11 +42,19 @@ sed -i '/memory_limit/c\memory_limit = 4G' /etc/php/7.2/fpm/php.ini
 sed -i '/opcache.enable/c\opcache.enable=1' /etc/php/7.2/fpm/php.ini
 sed -i '/opcache.save_comments/c\opcache.save_comments=1' /etc/php/7.2/fpm/php.ini
 
+#Set PHP 7.2 as default PHP
+update-alternatives --set php /usr/bin/php7.2
+update-alternatives --set phar /usr/bin/phar7.2
+update-alternatives --set phar.phar /usr/bin/phar.phar7.2
+update-alternatives --set phpize /usr/bin/phpize7.2
+update-alternatives --set php-config /usr/bin/php-config7.2
+service php7.2-fpm restart
+
 #Install Composer
-php7.2 -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"
-php7.2 -r "if (hash_file('sha384', 'composer-setup.php') === 'a5c698ffe4b8e849a443b120cd5ba38043260d5c4023dbf93e1558871f1f07f58274fc6f4c93bcfd858c6bd0775cd8d1') { echo 'Installer verified'; } else { echo 'Installer corrupt'; unlink('composer-setup.php'); } echo PHP_EOL;"
-php7.2 composer-setup.php
-php7.2 -r "unlink('composer-setup.php');"
+php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"
+php -r "if (hash_file('sha384', 'composer-setup.php') === 'a5c698ffe4b8e849a443b120cd5ba38043260d5c4023dbf93e1558871f1f07f58274fc6f4c93bcfd858c6bd0775cd8d1') { echo 'Installer verified'; } else { echo 'Installer corrupt'; unlink('composer-setup.php'); } echo PHP_EOL;"
+php composer-setup.php
+php -r "unlink('composer-setup.php');"
 mv composer.phar /usr/local/bin/composer 
 
 #Install zip & unzip

@@ -20,7 +20,13 @@ What things you need to install the software and how to install them
 
 A step by step how to install WDL
 
-First clone repo
+Install git
+
+```shell
+sudo apt install -y git
+```
+
+Then clone repo
 
 ```shell
 cd ~
@@ -104,6 +110,15 @@ For example:
 ```apache
 SetHandler "proxy:unix:/var/run/php/php7.0-fpm.sock|fcgi://localhost/"
 ```
+
+### TODO
+
+1. User able to choose PHP version
+2. Additional PHP version installer
+3. Exception protection
+4. Apache optimization
+5. MariaDB optimization
+6. PHP optimization
 
 ## Authors
 
