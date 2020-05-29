@@ -37,8 +37,10 @@ apt install -y php7.2 php7.2-fpm php7.2-common php7.2-xml php7.2-bcmath php7.2-b
 
 #Change settings in php.ini
 sed -i '/max_input_time/c\max_input_time = 1800' /etc/php/7.2/fpm/php.ini
-sed -i '/max_input_time/c\max_execution_time = 1800' /etc/php/7.2/fpm/php.ini
-sed -i '/max_input_time/c\memory_limit = 4G' /etc/php/7.2/fpm/php.ini
+sed -i '/max_execution_time/c\max_execution_time = 1800' /etc/php/7.2/fpm/php.ini
+sed -i '/memory_limit/c\memory_limit = 4G' /etc/php/7.2/fpm/php.ini
+sed -i '/opcache.enable/c\opcache.enable=1' /etc/php/7.2/fpm/php.ini
+sed -i '/opcache.save_comments/c\opcache.save_comments=1' /etc/php/7.2/fpm/php.ini
 
 #Install Composer
 php7.2 -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"
@@ -47,7 +49,7 @@ php7.2 composer-setup.php
 php7.2 -r "unlink('composer-setup.php');"
 mv composer.phar /usr/local/bin/composer 
 
-#Install zip & unzip, required for Magento2 composer installation
+#Install zip & unzip
 apt install -y zip unzip
 
 #Install phpMyAdmin
