@@ -38,16 +38,17 @@ Then let's run script which will install required packages and configure them. A
 ```shell
 sudo sh wdl.sh
 ```
-Now you need to configure MariaDB.
+<!-- Now you need to configure MariaDB.
 
 ```
 sudo mysql -u root
+GRANT ALL PRIVILEGES ON *.* TO 'phpmyadmin'@'localhost' WITH GRANT OPTION;
 USE mysql;
 UPDATE user SET plugin='mysql_native_password' WHERE User='root';
 FLUSH PRIVILEGES;
 exit;
 sudo service mysql restart
-```
+``` -->
 
 ### How to use
 
