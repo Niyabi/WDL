@@ -15,14 +15,10 @@ apt install -y wget
 
 #Install Apache2
 cd /tmp && wget http://mirrors.kernel.org/ubuntu/pool/multiverse/liba/libapache-mod-fastcgi/libapache2-mod-fastcgi_2.4.7~0910052141-1.2_amd64.deb
-dpkg -i libapache2-mod-fastcgi_2.4.7~0910052141-1.2_amd64.deb; apt install -f
-apt install -y apache2 libapache2-mpm-itk libapache2-mod-fastcgi libapache2-mod-fcgid libapache2-mod-php7.2
+dpkg -i libapache2-mod-fastcgi_2.4.7~0910052141-1.2_amd64.deb; apt install -fy
+apt install -y apache2 libapache2-mpm-itk libapache2-mod-fastcgi libapache2-mod-fcgid 
 dpkg --configure -a
-
-#Configure Apache2
-sed -i '/AllowOverride None/c\AllowOverride All' /etc/apache2/apache2.conf
-sed -i '/Require all denied/c\Require all granted' /etc/apache2/apache2.conf
-echo "AcceptFilter http none" >> /etc/apache2/apache2.conf
+service apache2 start
 
 #Activate Apache2 mods
 a2enmod rewrite actions headers deflate expires fastcgi fcgid alias proxy_fcgi 
@@ -30,10 +26,10 @@ service apache2 restart
 
 #Add PHP repo
 apt install -y software-properties-common
-apt update
 apt install -y apt-transport-https lsb-release ca-certificates
 wget -O /etc/apt/trusted.gpg.d/php.gpg https://packages.sury.org/php/apt.gpg
 sh -c 'echo "deb https://packages.sury.org/php/ $(lsb_release -sc) main" > /etc/apt/sources.list.d/php.list'
+apt update
 
 #Install PHP 7.2 and some of its extensions
 apt install -y php7.2 php7.2-fpm php7.2-common php7.2-xml php7.2-bcmath php7.2-bz2 php7.2-curl php7.2-gd php7.2-intl php7.2-json php7.2-mbstring php7.2-opcache php7.2-mysql php7.2-readline php7.2-soap php7.2-zip
@@ -69,6 +65,12 @@ apt install -y zip unzip
 apt install -y php-tcpdf
 apt -t buster-backports install -y php-twig
 apt install -y phpmyadmin
+
+#Configure Apache2
+apt install -y libapache2-mod-php7.2
+sed -i '/AllowOverride None/c\AllowOverride All' /etc/apache2/apache2.conf
+sed -i '/Require all denied/c\Require all granted' /etc/apache2/apache2.conf
+echo "AcceptFilter http none" >> /etc/apache2/apache2.conf
 
 #Configure MariaDB
 mysql -u root <<MY_QUERY

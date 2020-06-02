@@ -20,17 +20,16 @@ What things you need to install the software and how to install them
 
 A step by step how to install WDL
 
-Install git
+Update packages list, upgrade packages and install git
 
 ```shell
-sudo apt install -y git
+sudo apt update && upgrade -y && install -y git
 ```
 
 Then clone repo
 
 ```shell
-cd ~
-git clone https://github.com/Niyabi/WDL.git
+cd ~ && git clone https://github.com/Niyabi/WDL.git
 ```
 
 Then let's run script which will install required packages and configure them. At The end phpMyAdmin installer will ask few things. When asked if to configure database check *Yes*, when asked about webserver check (using Spacebar) *apache2*. 
