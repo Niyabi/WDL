@@ -23,7 +23,7 @@ A step by step how to install WDL
 Update packages list, upgrade packages and install git
 
 ```shell
-sudo apt update && upgrade -y && install -y git
+sudo apt update && sudo apt upgrade -y && sudo apt install -y git
 ```
 
 Then clone repo

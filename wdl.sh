@@ -42,6 +42,7 @@ sed -i '/memory_limit/c\memory_limit = 4G' /etc/php/7.2/fpm/php.ini
 sed -i '/opcache.enable/c\opcache.enable=1' /etc/php/7.2/fpm/php.ini
 sed -i '/opcache.save_comments/c\opcache.save_comments=1' /etc/php/7.2/fpm/php.ini
 sed -i '/cgi.fix_pathinfo/c\cgi.fix_pathinfo=1' /etc/php/7.2/fpm/php.ini
+service php7.2-fpm start
 
 #Set PHP 7.2 as default PHP
 update-alternatives --set php /usr/bin/php7.2
@@ -74,7 +75,6 @@ echo "AcceptFilter http none" >> /etc/apache2/apache2.conf
 
 #Configure MariaDB
 mysql -u root <<MY_QUERY
-sudo mysql -u root
 GRANT ALL PRIVILEGES ON *.* TO 'phpmyadmin'@'localhost' WITH GRANT OPTION;
 USE mysql;
 UPDATE user SET plugin='mysql_native_password' WHERE User='root';
