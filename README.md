@@ -35,19 +35,8 @@ cd ~ && git clone https://github.com/Niyabi/WDL.git
 Then let's run script which will install required packages and configure them. At The end phpMyAdmin installer will ask few things. When asked if to configure database check *Yes*, when asked about webserver check (using Spacebar) *apache2*. 
 
 ```shell
-sudo sh wdl.sh
+sudo sh ~/WDL/wdl.sh
 ```
-<!-- Now you need to configure MariaDB.
-
-```
-sudo mysql -u root
-GRANT ALL PRIVILEGES ON *.* TO 'phpmyadmin'@'localhost' WITH GRANT OPTION;
-USE mysql;
-UPDATE user SET plugin='mysql_native_password' WHERE User='root';
-FLUSH PRIVILEGES;
-exit;
-sudo service mysql restart
-``` -->
 
 ### How to use
 
@@ -71,7 +60,7 @@ sudo sh ~/WDL/virtual-host.sh
 
 To connect to virtual host open Notepad as administrator, open hosts file in *C:\Windows\System32\drivers\etc*. Type your local IP adress (you can check it in Debian commandline with *ip a* command) and project URL e.g. *192.168.0.2 myproject.local*. Save and close file.
 
-To access database use use HeidiSQL or phpMyAdmin (http://localhost/phpmyadmin/). To login to phpMyAdmin (if not asked for username during phpMyAdmin installation) username will be phpmyadmin and password then one you set during installation.
+To access database use use HeidiSQL or phpMyAdmin (http://localhost/phpmyadmin/). To login to phpMyAdmin (if not asked for username during phpMyAdmin installation) username will be *phpmyadmin* and password the one you set during installation.
 
 ## Notes
 

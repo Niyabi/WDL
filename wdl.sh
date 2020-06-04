@@ -53,8 +53,10 @@ update-alternatives --set php-config /usr/bin/php-config7.2
 service php7.2-fpm restart
 
 #Install Composer
+mkdir ~/composer/
+cd ~/composer/
 php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"
-php -r "if (hash_file('sha384', 'composer-setup.php') === 'a5c698ffe4b8e849a443b120cd5ba38043260d5c4023dbf93e1558871f1f07f58274fc6f4c93bcfd858c6bd0775cd8d1') { echo 'Installer verified'; } else { echo 'Installer corrupt'; unlink('composer-setup.php'); } echo PHP_EOL;"
+php -r "if (hash_file('sha384', 'composer-setup.php') === 'e0012edf3e80b6978849f5eff0d4b4e4c79ff1609dd1e613307e16318854d24ae64f26d17af3ef0bf7cfb710ca74755a') { echo 'Installer verified'; } else { echo 'Installer corrupt'; unlink('composer-setup.php'); } echo PHP_EOL;"
 php composer-setup.php
 php -r "unlink('composer-setup.php');"
 mv composer.phar /usr/local/bin/composer 
@@ -69,8 +71,11 @@ apt install -y phpmyadmin
 
 #Configure Apache2
 apt install -y libapache2-mod-php7.2
-sed -i '/AllowOverride None/c\AllowOverride All' /etc/apache2/apache2.conf
-sed -i '/Require all denied/c\Require all granted' /etc/apache2/apache2.conf
+sed -i '92s/.*/Timeout 300/' /etc/apache2/apache2.conf
+sed -i '161s/.*/    AllowOverride All/' /etc/apache2/apache2.conf
+sed -i '172s/.*/    AllowOverride All/' /etc/apache2/apache2.conf
+sed -i '162s/.*/    Require all granted/' /etc/apache2/apache2.conf
+sed -i '173s/.*/    Require all granted/' /etc/apache2/apache2.conf
 echo "AcceptFilter http none" >> /etc/apache2/apache2.conf
 
 #Configure MariaDB
@@ -80,7 +85,7 @@ USE mysql;
 UPDATE user SET plugin='mysql_native_password' WHERE User='root';
 FLUSH PRIVILEGES;
 MY_QUERY
-sudo service mysql restart
+service mysql restart
 
 #Update package list
 apt update

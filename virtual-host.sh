@@ -1,9 +1,9 @@
 #!/bin/bash
 
-/bin/echo -n "Enter your virtual host name, make it simple (e.g. myproject): "
+echo -n "Enter your virtual host name, make it simple (e.g. myproject): "
 read PROJECT_NAME
 
-/bin/echo -n "Enter path to your project (e.g. /var/html/myproject/): "
+echo -n "Enter path to your project (e.g. /var/html/myproject/): "
 read PROJECT_PATH
 
 CONFIG='
