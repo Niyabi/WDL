@@ -77,6 +77,7 @@ sed -i '172s/.*/    AllowOverride All/' /etc/apache2/apache2.conf
 sed -i '162s/.*/    Require all granted/' /etc/apache2/apache2.conf
 sed -i '173s/.*/    Require all granted/' /etc/apache2/apache2.conf
 echo "AcceptFilter http none" >> /etc/apache2/apache2.conf
+echo "ProxyTimeout 600" >> /etc/apache2/apache2.conf
 
 #Configure MariaDB
 mysql -u root <<MY_QUERY
