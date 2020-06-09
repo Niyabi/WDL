@@ -58,9 +58,9 @@ To create virtual host run virtual-host.sh. You will be asked for project name a
 sudo sh ~/WDL/virtual-host.sh
 ```
 
-To connect to virtual host open Notepad as administrator, open hosts file in *C:\Windows\System32\drivers\etc*. Type your local IP adress (you can check it in Debian commandline with *ip a* command) and project URL e.g. *192.168.0.2 myproject.local*. Save and close file.
+To connect to virtual host open Notepad as administrator, open hosts file in *C:\Windows\System32\drivers\etc*. Type localhost IP adress (*127.0.0.1*) and project URL e.g. *127.0.0.1 myproject.local*. Save and close file.
 
-To access database use use HeidiSQL or phpMyAdmin (http://localhost/phpmyadmin/). To login to phpMyAdmin (if not asked for username during phpMyAdmin installation) username will be *phpmyadmin* and password the one you set during installation.
+To access database use use HeidiSQL or phpMyAdmin (*http://localhost/phpmyadmin/*). To login to phpMyAdmin (if not asked for username during phpMyAdmin installation) username will be *phpmyadmin* and password the one you set during installation.
 
 ## Notes
 
