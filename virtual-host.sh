@@ -1,10 +1,35 @@
 #!/bin/bash
 
-echo -n "Enter your virtual host name, make it simple (e.g. myproject): "
-read PROJECT_NAME
+FLAG = true
 
-echo -n "Enter path to your project (e.g. /var/html/myproject/): "
-read PROJECT_PATH
+while $FLAG
+do
+        echo -n "Enter your virtual host name, make it simple (e.g. myproject): "
+        read PROJECT_NAME
+
+        if [  -f "/etc/apache2/sites-available/$PROJECT_NAME.local.conf" ]; then
+                FLAG = true
+                echo "\e[91mVirtual host already exists.\e[0m Choose different virtual host name."
+        else
+                FLAG = false
+        fi
+done
+
+FLAG = true
+
+while $FLAG
+do
+        echo -n "Enter path to your project (e.g. /var/html/myproject/): "
+        read PROJECT_PATH
+
+        if [ ! -d "$PROJECT_PATH" ]; then
+                FLAG = true
+                echo "\e[91mDirectory does not exists.\e[0m Choose existing directory."
+        else
+                FLAG = false
+        fi
+done
+
 
 CONFIG='
 <VirtualHost *:80>
