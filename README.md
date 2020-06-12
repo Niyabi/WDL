@@ -29,13 +29,13 @@ sudo apt update && sudo apt upgrade -y && sudo apt install -y git
 Then clone repo
 
 ```shell
-cd ~ && git clone https://github.com/Niyabi/WDL.git
+cd ~ && git clone https://github.com/Niyabi/WDL.git && chmod -R +x ./
 ```
 
 Then let's run script which will install required packages and configure them. At The end phpMyAdmin installer will ask few things. When asked if to configure database check *Yes*, when asked about webserver check (using Spacebar) *apache2*. 
 
 ```shell
-sudo sh ~/WDL/wdl.sh
+sudo ~/WDL/wdl.sh
 ```
 
 ### How to use
