@@ -1,6 +1,6 @@
 #!/bin/bash
 
-FLAG = true
+FLAG=true
 
 while $FLAG
 do
@@ -8,14 +8,14 @@ do
         read PROJECT_NAME
 
         if [  -f "/etc/apache2/sites-available/$PROJECT_NAME.local.conf" ]; then
-                FLAG = true
+                FLAG=true
                 echo "\e[91mVirtual host already exists.\e[0m Choose different virtual host name."
         else
-                FLAG = false
+                FLAG=false
         fi
 done
 
-FLAG = true
+FLAG=true
 
 while $FLAG
 do
@@ -23,10 +23,10 @@ do
         read PROJECT_PATH
 
         if [ ! -d "$PROJECT_PATH" ]; then
-                FLAG = true
+                FLAG=true
                 echo "\e[91mDirectory does not exists.\e[0m Choose existing directory."
         else
-                FLAG = false
+                FLAG=false
         fi
 done
 

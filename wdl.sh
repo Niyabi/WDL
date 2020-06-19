@@ -39,6 +39,7 @@ sed -i '/default_socket_timeout/c\default_socket_timeout = 120' /etc/php/7.2/fpm
 sed -i '/max_input_time/c\max_input_time = 1800' /etc/php/7.2/fpm/php.ini
 sed -i '/max_execution_time/c\max_execution_time = 1800' /etc/php/7.2/fpm/php.ini
 sed -i '/memory_limit/c\memory_limit = 4G' /etc/php/7.2/fpm/php.ini
+sed -i '/opcache.enable/c\opcache.enable=0' /etc/php/7.2/fpm/php.ini
 sed -i '/opcache.save_comments/c\opcache.save_comments=1' /etc/php/7.2/fpm/php.ini
 sed -i '/cgi.fix_pathinfo/c\cgi.fix_pathinfo=1' /etc/php/7.2/fpm/php.ini
 service php7.2-fpm start
