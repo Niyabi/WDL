@@ -7,25 +7,29 @@ CLC='\e[0m' #close color tag
 
 # Step #2: User defined function
 
-#Install WDL function
+# Install WDL function
 install_wdl(){
-        ./scripts/install-wdl.sh
+    sh ./scripts/install-wdl.sh
 }
 
-#Create virtual host function
+# Create virtual host function
 create_vhost() {
-        ./scripts/create-vhost.sh
+    ./scripts/create-vhost.sh
 }
 
-#Remove virtual host function
+# Remove virtual host function
 remove_vhost(){
-        ./scripts/remove-vhost.sh
+    sh ./scripts/remove-vhost.sh
 }
 
-#Function to display menus
+install_php(){
+	sh ./scripts/install_php.sh
+}
+
+# Function to display menus
 show_menu() {
 	clear
-        echo "
+    echo "
 WDL - WSL Debian localhost
 Copyright (C) 2020  Szymon Krawiec
 
@@ -42,26 +46,25 @@ You should have received a copy of the GNU General Public License along with thi
 	echo "1. Install WDL"
 	echo "2. Create virtual host"
 	echo "3. Remove virtual host"
-        echo "4. Exit"
+	echo "4. Install additional PHP version"
+    echo "5. Exit"
 }
 
-#Read input from the keyboard and take a action
+# Read input from the keyboard and take a action
 read_options(){
 	local choice
-	read -p "Enter choice [ 1 - 4] " choice
+	read -p "Enter choice [ 1 - 5]: " choice
 	case $choice in
 		1) install_wdl ;;
 		2) create_vhost ;;
-                3) remove_vhost ;;
-		4) exit 0;;
+        3) remove_vhost ;;
+		4) install_php ;;
+		5) exit 0;;
 		*) echo -e "${RED}Error...${CLC} Type your choice again in a moment." && sleep 2 && clear
 	esac
 }
 
-# Step #3: Trap CTRL+C, CTRL+Z and quit singles
-trap '' SIGINT SIGQUIT SIGTSTP
-
-# Step #4: Main logic - infinite loop
+# Step #3: Main logic - infinite loop
 while true
 do
 	show_menu
