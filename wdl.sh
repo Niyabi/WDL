@@ -10,8 +10,8 @@ apt upgrade -y
 apt install -y mariadb-server
 service mysql start
 
-#Install wget
-apt install -y wget
+#Install wget & curl
+apt install -y wget curl
 
 #Install Apache2
 cd /tmp && wget http://mirrors.kernel.org/ubuntu/pool/multiverse/liba/libapache-mod-fastcgi/libapache2-mod-fastcgi_2.4.7~0910052141-1.2_amd64.deb
